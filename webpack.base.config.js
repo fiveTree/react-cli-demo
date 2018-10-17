@@ -40,6 +40,7 @@ module.exports = {
         },
         {
             test: /\.css$/,
+            include: path.resolve(__dirname, "./src") ,
             use: ["style-loader", "css-loader", {
                 loader:'postcss-loader',
                 options:postcssOptions
@@ -47,6 +48,7 @@ module.exports = {
         },
         {
             test: /\.scss$/,
+            include: path.resolve(__dirname, "./src") ,
             use: ['style-loader','css-loader',{
                 loader:'postcss-loader',
                 options:postcssOptions

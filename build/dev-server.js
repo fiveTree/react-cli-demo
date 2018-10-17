@@ -1,9 +1,14 @@
 var path = require('path')
+const net=require('net')
+
 var express = require('express')
 var webpack = require('webpack')
 var webpackConfig = require('../webpack.dev.config.js')
+// import portIsOccupied from './portIsOccupied.js';
+var portIsOccupied = require('./portIsOccupied.js')
+
 var app = express()
-var port=30005
+var port=30000
 // 加载webpack配置
 var compiler = webpack(webpackConfig)
 // 加载中间件webpack-dev-middleware
@@ -37,5 +42,31 @@ app.listen(port, 'localhost', function (err, result) {
     console.log(err);
     return console.log(err);
   }
-  console.log('Listening at http://localhost:' + port)
+  console.log('Listening at http://localhost:' + port +'\n')
 });
+
+// var __port = port
+// server(port)
+// portIsOccupied(30006,(isOccupied,port)=>{
+//   console.log(isOccupied,port)
+// })
+// 检测port是否被占用 并启动服务
+// function server (port=8080){
+//     // console.log('> Listening at http://localhost:' + port+ '\n')
+//     portIsOccupied(port,(isOccupied,port)=>{
+//       console.log(isOccupied,port)
+//       if(!isOccupied){
+//         console.log(`port:${port} is occupied! \ntry listen port:${port+1}!`)
+//         server(port+1)
+//       }else{
+//         console.log('> Starting dev server...')
+//         app.listen(port, 'localhost', function (err, result) {
+//           if (err) {
+//             console.log(err);
+//             return console.log(err);
+//           }
+//           console.log('> Listening at http://localhost:' + port)
+//         });
+//       }
+//     })
+// }
